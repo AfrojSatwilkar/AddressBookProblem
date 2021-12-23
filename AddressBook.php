@@ -1,35 +1,53 @@
 <?php
-class AddressBook {
-    public $firstName;
-    public $lastName;
-    public $address;
-    public $city;
-    public $state;
-    public $emailID;
-    public $zipCode;
-    public $mobileNumber;
+include 'ContactDetails.php';
+class AddressBook 
+{
+    public $array = [];
+    public $person;
+    public function addNewContact()
+    {
+        $firstName = readline("Enter First Name : ");
+        $lastName = readline("Enter Last Name : ");
+        $address = readline("Enter Address : ");
+        $city = readline("Enter City : ");
+        $state = readline("Enter State : ");
+        $zipCode = readline("Enter ZipCode : ");
+        $mobileNumber = readline("Enter Mobile Number : ");
+        $emailID = readline("Enter EmailId : ");
+
+        $this->person = new ContactDetails($firstName, $lastName, $address, $city, $state, $emailID, $zipCode, $mobileNumber);
+        array_push($this->array, $this->person);
+        $this->printContact();
+    }
 
     public function printContact() {
-        $this->firstName = "Afroj";
-        $this->lastName = "Satwilkar";
-        $this->address = "Bhadkamba";
-        $this->city = "Ratnagiri";
-        $this->state = "Maharashtra";
-        $this->emailID = "afrozsatvilkar2014@gmail.com";
-        $this->zipCode = 415801;
-        $this->mobileNumber = 9075528330;
-
-        echo "Contact Details : \n";
-        echo "Name : " . $this->firstName . " " . $this->lastName . "\n"
-             . "Address : " . $this->address . "\n"
-             . "City : " . $this->city . "\n"
-             . "State : " . $this->state . "\n"
-             . "ZipCode : " . $this->zipCode . "\n"
-             . "Mobile Number : " . $this->mobileNumber . "\n"
-             . "Email Id : " . $this->emailID . "\n";
+        for($i = 0; $i < count($this->array); $i++) {
+            echo "ContactDetails : \nName : " . $this->person->getFirstName() . " " . $this->person->getLastName() . "\n"
+             . "Address : " . $this->person->getAddress() . "\n"
+             . "City : " . $this->person->getCity() . "\n"
+             . "State : " . $this->person->getState() . "\n"
+             . "ZipCode : " . $this->person->getZipCode() . "\n"
+             . "Mobile Number : " . $this->person->getMobileNumber() . "\n"
+             . "Email Id : " . $this->person->getEmailId() . "\n";
+        }
     }
 }
 
+echo "Welcome to Address Book Program";
 $addressBook = new AddressBook();
-$addressBook->printContact();
+while(true){
+    $getUserInput = readline("Enter 1 to add new contact Enter 2 to Exit ");
+    switch ($getUserInput){
+        case 1 :
+            $addressBook->addNewContact();
+            break;
+        case 2 :
+            exit("Exit");
+            break;
+        default:
+            echo "Invalid user input";
+        
+    }
+}
+
 ?>
