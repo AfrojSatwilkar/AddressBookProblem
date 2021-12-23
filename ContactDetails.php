@@ -24,32 +24,64 @@ class ContactDetails {
         return $this->firstName;
     }
 
+    public function setFirstName($firstName) {
+        $this->firstName = $firstName;
+    }
+
     public function getLastName() {
         return $this->lastName;
+    }
+
+    public function setLastName($lastName) {
+        $this->lastName = $lastName;
     }
 
     public function getAddress() {
         return $this->address;
     }
 
+    public function setAddress($address) {
+        $this->address = $address;
+    }
+
     public function getCity() {
         return $this->city;
+    }
+
+    public function setCity($city) {
+        $this->city = $city;
     }
 
     public function getState() {
         return $this->state;
     }
 
+    public function setState($state) {
+        $this->state = $state;
+    }
+
     public function getZipCode() {
         return $this->zipCode;
+    }
+
+    public function setZipCode($zipCode) {
+        $this->zipCode = $zipCode;
     }
 
     public function getMobileNumber() {
         return $this->mobileNumber;
     }
 
+    public function setMobileNumber($mobileNumber) {
+        $this->mobileNumber = $mobileNumber;
+    }
+
     public function getEmailId() {
         return $this->emailID;
+    }
+
+    public function setEmailId($emailID) {
+        $this->emailID = $emailID;
     }
 
     public function __toString()
