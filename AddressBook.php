@@ -16,7 +16,7 @@ class AddressBook
         $emailID = readline("Enter EmailId : ");
 
         $this->person = new ContactDetails($firstName, $lastName, $address, $city, $state, $emailID, $zipCode, $mobileNumber);
-        array_push($this->array, $this->person);
+        array_push($this->array[], $this->person);
         $this->printContact();
     }
 
@@ -25,7 +25,6 @@ class AddressBook
         $edited = false;
         for($i = 0; $i < count($this->array); $i++) {
             $name = $this->array[$i];
-            echo $name->getFirstName();
             if ($editName == $name->getFirstName()) {
                 $firstName = readline("Edit First Name : ");
                 $lastName = readline("Edit Last Name : ");
@@ -58,9 +57,24 @@ class AddressBook
 
     }
 
+    public function deleteContact() {
+        $deleteName = readline("Enter the first name of person to delete contact");
+        $edited = false;
+        for($i = 0; $i < count($this->array); $i++) {
+            $name = $this->array[$i];
+            if ($deleteName == $name->getFirstName()) {
+                unset($this->array[$i]);
+                $this->printContact();
+            }
+        }
+    }
+
     public function printContact() {
         for($i = 0; $i < count($this->array); $i++) {
-            echo $this->array[$i];
+            foreach($this->array as $contact) {
+                echo $contact;
+            }
+            //echo $this->array[$i];
         }
     }
 }
@@ -68,7 +82,7 @@ class AddressBook
 echo "Welcome to Address Book Program";
 $addressBook = new AddressBook();
 while(true){
-    $getUserInput = readline("Enter 1 to add new contact Enter 2 to Exit ");
+    $getUserInput = readline("\nEnter 1 to add new contact\nEnter2 to edit \nEnter 3 to delete \nEnter 4 to exit \n");
     switch ($getUserInput){
         case 1 :
             $addressBook->addNewContact();
@@ -77,6 +91,9 @@ while(true){
             $addressBook->editContact();
             break;
         case 3 :
+            $addressBook->deleteContact();
+            break;
+        case 4 :
             exit("Exit");
             break;
         default:
