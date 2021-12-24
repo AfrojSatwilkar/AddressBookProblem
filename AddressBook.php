@@ -16,7 +16,7 @@ class AddressBook
         $emailID = readline("Enter EmailId : ");
 
         $this->person = new ContactDetails($firstName, $lastName, $address, $city, $state, $emailID, $zipCode, $mobileNumber);
-        array_push($this->array[], $this->person);
+        array_push($this->array, $this->person);
         $this->printContact();
     }
 
@@ -74,7 +74,6 @@ class AddressBook
             foreach($this->array as $contact) {
                 echo $contact;
             }
-            //echo $this->array[$i];
         }
     }
 }
