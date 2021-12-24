@@ -14,92 +14,52 @@ class AddressBook
         $zipCode = readline("Enter ZipCode : ");
         $mobileNumber = readline("Enter Mobile Number : ");
         $emailID = readline("Enter EmailId : ");
+        echo "\n";
 
         $this->person = new ContactDetails($firstName, $lastName, $address, $city, $state, $emailID, $zipCode, $mobileNumber);
-        array_push($this->array[], $this->person);
-        $this->printContact();
+        // array_push($this->array, $this->person);
+        // $this->printContact();
+        return $this->person;
     }
 
     public function editContact() {
-        $editName = readline("Enter the first name of person to edit contact");
-        $edited = false;
-        for($i = 0; $i < count($this->array); $i++) {
-            $name = $this->array[$i];
-            if ($editName == $name->getFirstName()) {
-                $firstName = readline("Edit First Name : ");
-                $lastName = readline("Edit Last Name : ");
-                $address = readline("Edit Address : ");
-                $city = readline("Edit City : ");
-                $state = readline("Edit State : ");
-                $zipCode = readline("Edit ZipCode : ");
-                $mobileNumber = readline("Edit Mobile Number : ");
-                $emailID = readline("Edit EmailId : ");
+        $firstName = readline("Edit First Name : ");
+        $lastName = readline("Edit Last Name : ");
+        $address = readline("Edit Address : ");
+        $city = readline("Edit City : ");
+        $state = readline("Edit State : ");
+        $zipCode = readline("Edit ZipCode : ");
+        $mobileNumber = readline("Edit Mobile Number : ");
+        $emailID = readline("Edit EmailId : ");
 
-                $name->setFirstName($firstName);
-                $name->setLastName($lastName);
-                $name->setAddress($address);
-                $name->setCity($city);
-                $name->setState($state);
-                $name->setZipCode($zipCode);
-                $name->setMobileNumber($mobileNumber);
-                $name->setEmailId($emailID);
-
-                $this->array[$i] = $name;
-                $this->printContact();
-
-                $edited = true;
-                break;
-            }
-        }
-        if (!$edited) {
-            echo "This name does not exist";
-        }
-
+        $this->person->setFirstName($firstName);
+        $this->person->setLastName($lastName);
+        $this->person->setAddress($address);
+        $this->person->setCity($city);
+        $this->person->setState($state);
+        $this->person->setZipCode($zipCode);
+        $this->person->setMobileNumber($mobileNumber);
+        $this->person->setEmailId($emailID);
+    
+        return $this->person;
     }
 
-    public function deleteContact() {
+    public function deleteContact($book) {
         $deleteName = readline("Enter the first name of person to delete contact");
-        $edited = false;
-        for($i = 0; $i < count($this->array); $i++) {
-            $name = $this->array[$i];
-            if ($deleteName == $name->getFirstName()) {
-                unset($this->array[$i]);
-                $this->printContact();
+        foreach($book as $key => $values) {
+            for($i = 0; $i < count($values); $i++) {
+                $name = $values[$i];
+                if ($deleteName == $name->getFirstName()) {
+                    unset($values[$i]);
+                    
+                }
             }
         }
-    }
-
-    public function printContact() {
-        for($i = 0; $i < count($this->array); $i++) {
-            foreach($this->array as $contact) {
-                echo $contact;
-            }
-            //echo $this->array[$i];
-        }
-    }
-}
-
-echo "Welcome to Address Book Program";
-$addressBook = new AddressBook();
-while(true){
-    $getUserInput = readline("\nEnter 1 to add new contact\nEnter2 to edit \nEnter 3 to delete \nEnter 4 to exit \n");
-    switch ($getUserInput){
-        case 1 :
-            $addressBook->addNewContact();
-            break;
-        case 2 : 
-            $addressBook->editContact();
-            break;
-        case 3 :
-            $addressBook->deleteContact();
-            break;
-        case 4 :
-            exit("Exit");
-            break;
-        default:
-            echo "Invalid user input";
+        return $book;
         
     }
+
+    
 }
 
 ?>
