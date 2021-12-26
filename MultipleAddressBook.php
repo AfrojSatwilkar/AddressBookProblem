@@ -13,12 +13,12 @@ class MultipleAddressBook {
     public function addAddressBook() {
         $bookName = readline("Enter Name of new Address Book: ");
         if(array_key_exists($bookName, $this->array)) {
-            echo "Address book with this name exists, Enter new name.";
+            echo "Address book with this name exists, Enter new name : ";
             $this->addAddressBook();
         } else {
             $this->array[$bookName] = NULL;
             //array_push($this->array[$bookName], $this->addressBook);
-            $newBook = readline("press 1 if you want to add another book or press any key to exit.");
+            $newBook = readline("press 1 if you want to add another book or press any key to exit : ");
             if($newBook == 1) {
                 $this->addAddressBook();
             }
@@ -26,18 +26,33 @@ class MultipleAddressBook {
     }
 
     public function addContact() {
-        $newContact = readline("Enter the name of Address book to add the contact.");
-        $number = readline("Enter the number of contacts you want to enter");
+        $newContact = readline("Enter the name of Address book to add the contact : ");
+        $number = readline("Enter the number of contacts you want to enter : ");
         if(array_key_exists($newContact, $this->array)) {
-            // $this->addressBook->addNewContact();
             for($i = 0; $i < $number; $i++) {
-                //if($this->array[$newContact] == NULL) {
-                $this->array[$newContact][$i] = $this->addressBook->addNewContact();
-                //} 
+                $firstName = readline("Enter First Name : ");
+                foreach($this->array as $key => $values) {
+                    if($key == $newContact) {
+                        if($values == NULL) {
+                            $this->array[$newContact][$i] = $this->addressBook->addNewContact($firstName);
+                            break;
+                        }
+                        for($j = 0; $j < $number; $j++) 
+                        //if(in_array($firstName, $values)) {
+                        if($firstName == $values[$j]->getFirstName()) {
+                            echo "The entered person is already exist.\n";
+                            $i--;
+                            break;
+                        } else {
+                            $this->array[$newContact][$i] = $this->addressBook->addNewContact($firstName);
+                            echo "Contact added successfully. \n";
+                            break;
+                        }
+                    }
+                }
+                
             }
-            //$this->array[$newContact]
-            //array_push($this->array[$newContact],$this->addressBook->addNewContact());
-        }  else {
+        } else {
             echo "No book found\n";
         }
     }
