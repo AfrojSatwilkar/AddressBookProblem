@@ -4,6 +4,11 @@ class AddressBook
 {
     public $array = [];
     public $person;
+
+    /**
+     * addNewContact method is used to add new contact in address book
+     * @param firstName
+     */
     public function addNewContact($firstName)
     {
         
@@ -17,12 +22,11 @@ class AddressBook
         echo "\n";
 
         $this->person = new ContactDetails($firstName, $lastName, $address, $city, $state, $emailID, $zipCode, $mobileNumber);
-        // array_push($this->array, $this->person);
-        // $this->printContact();
         return $this->person;
     }
 
     public function editContact() {
+
         $firstName = readline("Edit First Name : ");
         $lastName = readline("Edit Last Name : ");
         $address = readline("Edit Address : ");

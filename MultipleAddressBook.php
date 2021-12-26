@@ -10,6 +10,10 @@ class MultipleAddressBook {
         $this->addressBook = new AddressBook();
         $this->array = [];
     }
+
+    /**
+     * addAddressBook method is used to add multiple address book 
+     */
     public function addAddressBook() {
         $bookName = readline("Enter Name of new Address Book: ");
         if(array_key_exists($bookName, $this->array)) {
@@ -17,7 +21,6 @@ class MultipleAddressBook {
             $this->addAddressBook();
         } else {
             $this->array[$bookName] = NULL;
-            //array_push($this->array[$bookName], $this->addressBook);
             $newBook = readline("press 1 if you want to add another book or press any key to exit : ");
             if($newBook == 1) {
                 $this->addAddressBook();
@@ -25,6 +28,9 @@ class MultipleAddressBook {
         }
     }
 
+    /**
+     * addContact method is used to add multiple contact in addres book
+     */
     public function addContact() {
         $newContact = readline("Enter the name of Address book to add the contact : ");
         $number = readline("Enter the number of contacts you want to enter : ");
@@ -37,26 +43,28 @@ class MultipleAddressBook {
                             $this->array[$newContact][$i] = $this->addressBook->addNewContact($firstName);
                             break;
                         }
-                        for($j = 0; $j < $number; $j++) 
-                        //if(in_array($firstName, $values)) {
-                        if($firstName == $values[$j]->getFirstName()) {
-                            echo "The entered person is already exist.\n";
-                            $i--;
-                            break;
-                        } else {
-                            $this->array[$newContact][$i] = $this->addressBook->addNewContact($firstName);
-                            echo "Contact added successfully. \n";
-                            break;
+                        for($j = 0; $j < $number; $j++) {
+                            if($firstName == $values[$j]->getFirstName()) {
+                                echo "The entered person is already exist.\n";
+                                $i--;
+                                break;
+                            } else {
+                                $this->array[$newContact][$i] = $this->addressBook->addNewContact($firstName);
+                                echo "Contact added successfully. \n";
+                                break;
+                            }
                         }
                     }
-                }
-                
+                } 
             }
         } else {
             echo "No book found\n";
         }
     }
 
+    /**
+     * editContactInBook method is used to edit contact in address book
+     */
     public function editContactInBook() {
         $editBookName = readline("Enter Name of Address Book you want to edit: ");
         $editName = readline("Enter the first name of person to edit contact");
@@ -81,6 +89,9 @@ class MultipleAddressBook {
         }
     }
 
+    /**
+     * deleteAddressBook method is used to delete address book
+     */
     public function deleteAddressBook() {
         $bookName = readline("Enter Name of Address Book you want to delete: ");
         if(array_key_exists($bookName, $this->array)) {
@@ -91,6 +102,9 @@ class MultipleAddressBook {
         }
     }
 
+    /**
+     * deleteContactInBook method is used to delete contact in address book
+     */
     public function deleteContactInBook() {
         $bookName = readline("Enter Name of Address Book you want to delete the contacts in it: ");
         $deleteName = readline("Enter the first name of person to delete contact");
@@ -100,14 +114,15 @@ class MultipleAddressBook {
                     $person = $values[$i];
                     if($deleteName == $person->getFirstName()) {
                         unset($this->array[$key][$i]);
-                        //$this->array = array_values($this->array);
                     }
                 }
             }
-            // $this->array = $this->addressBook->deleteContact($this->array);
         }
     }
 
+    /**
+     * printContact method is used to view contact in address book
+     */
     public function printContact() {
         $bookName = readline("Enter Name of Address Book");
         foreach($this->array as $key => $values) {
@@ -123,6 +138,10 @@ class MultipleAddressBook {
         }
     }
 
+    /**
+     * searchPersonByCity method is used to search person in city
+     * @param cityName
+     */
     public function searchPersonByCity($cityName) {
         foreach($this->array as $key => $values) {
             for($i = 0; $i < count($values); $i++) {
@@ -136,6 +155,10 @@ class MultipleAddressBook {
         }
     }
 
+    /**
+     * searchPersonInState method is used to search person in state
+     * @param stateName
+     */
     public function searchPersonByState($stateName) {
         foreach($this->array as $key => $values) {
             for($i = 0; $i < count($values); $i++) {
@@ -147,6 +170,23 @@ class MultipleAddressBook {
                 }
             }
         }
+    }
+
+    /**
+     * contactsCount method is used to count contact in state or city
+     * @param name
+     * @return count
+     */
+    public function contactsCount($name) {
+        $count = 0;
+        foreach($this->array as $key => $values) {
+            for($i = 0; $i < count($values); $i++) {
+                if($name == $values[$i]->getState() || $name == $values[$i]->getCity()) {
+                    $count++;
+                }
+            }
+        }
+        return $count;
     }
 }
 ?>
