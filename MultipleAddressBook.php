@@ -122,5 +122,31 @@ class MultipleAddressBook {
             
         }
     }
+
+    public function searchPersonByCity($cityName) {
+        foreach($this->array as $key => $values) {
+            for($i = 0; $i < count($values); $i++) {
+                if($cityName == $values[$i]->getCity()) {
+                    echo "Address Book : " . $key . "\n";
+                    echo "First Name : " . $values[$i]->getFirstName() . "\n";
+                    echo "Last Name : " . $values[$i]->getLastName() . "\n";
+                    echo "\n";
+                }
+            }
+        }
+    }
+
+    public function searchPersonByState($stateName) {
+        foreach($this->array as $key => $values) {
+            for($i = 0; $i < count($values); $i++) {
+                if($stateName == $values[$i]->getState()) {
+                    echo "Address Book : " . $key . "\n";
+                    echo "First Name : " . $values[$i]->getFirstName() . "\n";
+                    echo "Last Name : " . $values[$i]->getLastName() . "\n";
+                    echo "\n";
+                }
+            }
+        }
+    }
 }
 ?>

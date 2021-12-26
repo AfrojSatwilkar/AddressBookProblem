@@ -6,7 +6,9 @@ while(true){
     echo "1. To add The new AddressBook\n2. To add contact in AddressBook\n" 
     . "3. To edit the contact in AddressBook\n4. To delete the AddressBook\n"
     . "5. To delete the contact in AddressBook\n" 
-    . "6. To Print the AddressBook\n0. to exit\n";
+    . "6. To Print the AddressBook\n"
+    . "7. Search person from a city\n"
+    . "8. Search person from a State\n0. to exit\n";
     $getUserInput = readline();
     switch ($getUserInput){
         case 1 :
@@ -26,6 +28,14 @@ while(true){
             break;
         case 6 :
             $multipleAddressBook->printContact();
+            break;
+        case 7 :
+            $cityName = readline("Enter city name : ");
+            $multipleAddressBook->searchPersonByCity($cityName);
+            break;
+        case 8 :
+            $stateName = readline("Enter state name : ");
+            $multipleAddressBook->searchPersonByState($stateName);
             break;
         case 0 :
             exit("Exit");
