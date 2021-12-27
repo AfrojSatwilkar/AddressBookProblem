@@ -256,6 +256,9 @@ class MultipleAddressBook {
         }
     }
 
+     /**
+     * sortByName method is used to sort the address book contact by city
+     */
     public function sortByCity() {
         $addressBook = readline("Enter Name of Address Book : ");
         foreach($this->array as $key => $values) {
@@ -277,6 +280,9 @@ class MultipleAddressBook {
         }
     }
 
+     /**
+     * sortByName method is used to sort the address book contact by state
+     */
     public function sortByState() {
         $addressBook = readline("Enter Name of Address Book : ");
         foreach($this->array as $key => $values) {
@@ -298,6 +304,9 @@ class MultipleAddressBook {
         }
     }
 
+     /**
+     * sortByName method is used to sort the address book contact by zip code
+     */
     public function sortByZipCode() {
         $addressBook = readline("Enter Name of Address Book : ");
         foreach($this->array as $key => $values) {
